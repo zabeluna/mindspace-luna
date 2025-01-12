@@ -9,7 +9,9 @@ export default function NavBar() {
           mindspace
         </Link>
         <div className="pt-8 md:pr-24 flex space-x-8">
-          <div className="text-lg md:text-xl">about</div>
+          <div className="text-lg md:text-xl">
+            <Link href="/about">about</Link>
+          </div>
           <Button asChild>
             <Link href="/">buy me a coffee?</Link>
           </Button>
