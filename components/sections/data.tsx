@@ -1,22 +1,19 @@
 "use client"
 
+import { icons, LucideIcon } from "lucide-react";
 import { ReactNode, useRef } from "react";
 import { useState } from "react";
 
 export type IconsSounds = {
-  id: string;
   icon: ReactNode;
   sound: string;
   volume: number;
-  hasVolume: boolean;
 };
 
 export default function Icons({
-    id,
     icon,
     sound,
     volume,
-    hasVolume,
  } : IconsSounds) {
 
    const [sounding, setSounding] = useState(0.5);
@@ -33,8 +30,8 @@ export default function Icons({
 
     return(
     <div>
-
-
+     <div className="w-[] h-[]">{icon}</div>
+     
     </div>
     );
  } 
