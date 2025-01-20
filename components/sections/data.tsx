@@ -1,37 +1,63 @@
-"use client"
+"use client";
 
-import { icons, LucideIcon } from "lucide-react";
-import { ReactNode, useRef } from "react";
+import { useEffect } from "react";
+import { useRef } from "react";
 import { useState } from "react";
+import Image from "next/image";
 
-export type IconsSounds = {
-  icon: ReactNode;
-  sound: string;
-  volume: number;
+export type Sounds = {
+  sound: any;
+  icon1: any;
+  icon2: any;
 };
 
-export default function Icons({
-    icon,
-    sound,
-    volume,
- } : IconsSounds) {
+export default function Data({ sound, icon1, icon2 }: Sounds) {
+  const audioRef = useRef<HTMLAudioElement>(null);
 
-   const [sounding, setSounding] = useState(0.5);
-   const musicRef = useRef(null);
-   
+  const [isPlaying, setIsPlaying] = useState(false);
 
-   function running(){
+  function setPlayingState(state: boolean | ((prevState: boolean) => boolean)) {
+    setIsPlaying(state);
+  }
 
-   }
+  function toggleIsPlaying() {
+    setIsPlaying(!isPlaying);
+  }
 
-   function stopRunning(){
+  useEffect(() => {
+    if (!audioRef.current) {
+      return;
+    }
 
-   }
+    if (isPlaying) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying]);
 
-    return(
-    <div>
-     <div className="w-[] h-[]">{icon}</div>
-     
+  return (
+    <div className="">
+      <div>
+        <div className="">
+          {isPlaying ? (
+            <button onClick={toggleIsPlaying}>
+              <Image src={icon1} width={40} height={40} alt="lucide-react" />
+            </button>
+          ) : (
+            <button onClick={toggleIsPlaying}>
+              <Image src={icon2} width={40} height={40} alt="lucide-react" />
+            </button>
+          )}
+        </div>
+        <audio
+          src={sound}
+          autoPlay={true}
+          ref={audioRef}
+          onPlay={() => setPlayingState(true)}
+          onPause={() => setPlayingState(false)}
+        />
+      </div>
     </div>
-    );
- } 
+  );
+}
