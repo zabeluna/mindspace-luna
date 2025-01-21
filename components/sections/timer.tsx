@@ -51,32 +51,32 @@ export default function Timer() {
 
   return (
     <div>
-      <h1 className="md:mt-44 mt-10 md:text-4xl text-3xl text-center">
+      <h1 className="md:mt-44 mt-20 md:text-4xl text-3xl text-center">
         sit for a while, turn on the sound and relax.
       </h1>
 
-      <div className="flex justify-center md:space-x-2 mt-16">
+      <div className="flex justify-center space-x-2 mt-16">
         <Button
           onClick={resetTime}
-          className="md:w-[50px] md:h-[50px] bg-green-900 hover:bg-green-700 rounded-full"
+          className="w-[50px] h-[50px] bg-green-900 hover:bg-green-700 rounded-full"
         >
           <Image src={Reset} width={100} height={100} alt="Reset" />
         </Button>
-        <div className="md:w-[160px] md:h-[50px] rounded-full bg-green-900 text-xl text-center md:pt-3 display">
+        <div className="w-[160px] h-[50px] rounded-full bg-green-900 text-xl text-center pt-3 display">
           {formatTime()}
         </div>
         <div>
           {running ? (
             <Button
               onClick={stopTime}
-              className="md:w-[50px] md:h-[50px] bg-green-900 hover:bg-green-700 rounded-full"
+              className="w-[50px] h-[50px] bg-green-900 hover:bg-green-700 rounded-full"
             >
               <Image src={Pause} width={100} height={100} alt="Pause" />
             </Button>
           ) : (
             <Button
               onClick={startTime}
-              className="md:w-[50px] md:h-[50px] bg-green-900 hover:bg-green-700 rounded-full mb-24"
+              className="w-[50px] h-[50px] bg-green-900 hover:bg-green-700 rounded-full"
             >
               <Image src={Play} width={100} height={100} alt="Start" />
             </Button>

@@ -12,9 +12,9 @@ export default function NavBar() {
           <div className="text-lg md:text-xl">
             <Link href="/about">about</Link>
           </div>
-          <Button asChild>
-            <Link href="/">buy me a coffee?</Link>
-          </Button>
+          <a href="https://www.izabelleluna.com/">
+            <Button>hey! click here</Button>
+          </a>
         </div>
       </div>
     </div>
