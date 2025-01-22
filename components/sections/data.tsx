@@ -12,42 +12,22 @@ export type Sounds = {
 };
 
 export default function Data({ sound, icon1, icon2 }: Sounds) {
-  const [volume, setVolume] = useState(1);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const controlRef = useRef(0);
+  const [control, setControl] = useState(false);
 
-  function setPlayingState(state: boolean | ((prevState: boolean) => boolean)) {
-    setIsPlaying(state);
-  }
-
-  function toggleIsPlaying() {
-    setIsPlaying(!isPlaying);
-  }
-
-  useEffect(() => {
-    if (!audioRef.current) {
-      return;
+  const toggleIsPlaying = () => {
+    const audio = audioRef.current;
+    if (audio) {
+      if (isPlaying) {
+        audio.pause();
+      } else {
+        audio.play();
+      }
+      setIsPlaying(!isPlaying);
+      setControl(!isPlaying); 
     }
-
-    if (isPlaying) {
-      audioRef.current.play();
-    } else {
-      audioRef.current.pause();
-    }
-  }, [isPlaying]);
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
-    }
-  }, [volume]);
-
-  useEffect(() => {
-    if (isPlaying) {
-      
-    }
-  });
+  }; 
 
   return (
     <div className="justify-items-center">
@@ -63,15 +43,22 @@ export default function Data({ sound, icon1, icon2 }: Sounds) {
 
       <audio
         src={sound}
-        autoPlay={true}
+        autoPlay={false}
         ref={audioRef}
         loop
-        onPlay={() => setPlayingState(true)}
-        onPause={() => setPlayingState(false)}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
       ></audio>
 
       <div>
-       
+        {control && (
+          <input type="range" min={0} max={1} step={0.01} className="bg-white accent-slate-100 w-[50px] h-[2px]" onChange={(e) => {
+            const volume = parseFloat(e.target.value);
+            if (audioRef.current) {
+              audioRef.current.volume = volume;
+            }
+          }}/>
+        )}
       </div>
     </div>
   );
