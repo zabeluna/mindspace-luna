@@ -25,9 +25,9 @@ export default function Data({ sound, icon1, icon2 }: Sounds) {
         audio.play();
       }
       setIsPlaying(!isPlaying);
-      setControl(!isPlaying); 
+      setControl(!isPlaying);
     }
-  }; 
+  };
 
   return (
     <div className="justify-items-center">
@@ -50,15 +50,20 @@ export default function Data({ sound, icon1, icon2 }: Sounds) {
         onPause={() => setIsPlaying(false)}
       ></audio>
 
-      <div>
-        {control && (
-          <input type="range" min={0} max={1} step={0.01} className="bg-white accent-slate-100 w-[50px] h-[2px]" onChange={(e) => {
+      <div className={control ? "visible" : "invisible"}>
+        <input
+          type="range"
+          min={0}
+          max={1}
+          step={0.01}
+          className="bg-white accent-slate-100 w-[50px] h-[2px]"
+          onChange={(e) => {
             const volume = parseFloat(e.target.value);
             if (audioRef.current) {
               audioRef.current.volume = volume;
             }
-          }}/>
-        )}
+          }}
+        />
       </div>
     </div>
   );
