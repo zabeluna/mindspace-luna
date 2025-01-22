@@ -12,9 +12,10 @@ export type Sounds = {
 };
 
 export default function Data({ sound, icon1, icon2 }: Sounds) {
+  const [volume, setVolume] = useState(1);
   const audioRef = useRef<HTMLAudioElement>(null);
-
   const [isPlaying, setIsPlaying] = useState(false);
+  const controlRef = useRef(0);
 
   function setPlayingState(state: boolean | ((prevState: boolean) => boolean)) {
     setIsPlaying(state);
@@ -36,27 +37,41 @@ export default function Data({ sound, icon1, icon2 }: Sounds) {
     }
   }, [isPlaying]);
 
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
+
+  useEffect(() => {
+    if (isPlaying) {
+      
+    }
+  });
+
   return (
-    <div className="">
+    <div className="justify-items-center">
+      {isPlaying ? (
+        <button onClick={toggleIsPlaying}>
+          <Image src={icon1} width={40} height={40} alt="lucide-react" />
+        </button>
+      ) : (
+        <button onClick={toggleIsPlaying}>
+          <Image src={icon2} width={40} height={40} alt="lucide-react" />
+        </button>
+      )}
+
+      <audio
+        src={sound}
+        autoPlay={true}
+        ref={audioRef}
+        loop
+        onPlay={() => setPlayingState(true)}
+        onPause={() => setPlayingState(false)}
+      ></audio>
+
       <div>
-        <div className="">
-          {isPlaying ? (
-            <button onClick={toggleIsPlaying}>
-              <Image src={icon1} width={40} height={40} alt="lucide-react" />
-            </button>
-          ) : (
-            <button onClick={toggleIsPlaying}>
-              <Image src={icon2} width={40} height={40} alt="lucide-react" />
-            </button>
-          )}
-        </div>
-        <audio
-          src={sound}
-          autoPlay={true}
-          ref={audioRef}
-          onPlay={() => setPlayingState(true)}
-          onPause={() => setPlayingState(false)}
-        />
+       
       </div>
     </div>
   );

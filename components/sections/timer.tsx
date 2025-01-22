@@ -12,6 +12,7 @@ export default function Timer() {
   const [running, setRunning] = useState(false);
   const intervalRef = useRef(null);
   const startRef = useRef(0);
+  
 
   useEffect(() => {
     if (running) {
