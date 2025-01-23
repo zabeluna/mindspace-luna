@@ -10,9 +10,8 @@ import Image from "next/image";
 export default function Timer() {
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
-  const intervalRef = useRef(null);
+  const intervalRef = useRef<any>(0);
   const startRef = useRef(0);
-  
 
   useEffect(() => {
     if (running) {
@@ -41,8 +40,8 @@ export default function Timer() {
   }
 
   function formatTime() {
-    let minutes = Math.floor((time / (1000 * 60)) % 60);
-    let seconds = Math.floor((time / 1000) % 60);
+    let minutes: any = Math.floor((time / (1000 * 60)) % 60);
+    let seconds: any = Math.floor((time / 1000) % 60);
 
     minutes = String(minutes).padStart(2, "0");
     seconds = String(seconds).padStart(2, "0");
