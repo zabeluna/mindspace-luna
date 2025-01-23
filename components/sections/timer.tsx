@@ -40,8 +40,8 @@ export default function Timer() {
   }
 
   function formatTime() {
-    let minutes: any = Math.floor((time / (1000 * 60)) % 60);
-    let seconds: any = Math.floor((time / 1000) % 60);
+    let minutes: number | string = Math.floor((time / (1000 * 60)) % 60);
+    let seconds: number | string = Math.floor((time / 1000) % 60);
 
     minutes = String(minutes).padStart(2, "0");
     seconds = String(seconds).padStart(2, "0");

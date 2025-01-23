@@ -1,17 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
 import { useRef } from "react";
 import { useState } from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 export type Sounds = {
-  sound: any;
-  icon1: any;
-  icon2: any;
+  sound: string;
+  firstIcon: StaticImageData;
+  SecondIcon: StaticImageData;
 };
 
-export default function Data({ sound, icon1, icon2 }: Sounds) {
+export default function Data({ sound, firstIcon, SecondIcon }: Sounds) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [control, setControl] = useState(false);
@@ -33,11 +32,11 @@ export default function Data({ sound, icon1, icon2 }: Sounds) {
     <div className="justify-items-center">
       {isPlaying ? (
         <button onClick={toggleIsPlaying}>
-          <Image src={icon1} width={40} height={40} alt="lucide-react" />
+          <Image src={firstIcon} width={40} height={40} alt="lucide-react" />
         </button>
       ) : (
         <button onClick={toggleIsPlaying}>
-          <Image src={icon2} width={40} height={40} alt="lucide-react" />
+          <Image src={SecondIcon} width={40} height={40} alt="lucide-react" />
         </button>
       )}
 
