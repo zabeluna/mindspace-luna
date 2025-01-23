@@ -10,7 +10,7 @@ import Image from "next/image";
 export default function Timer() {
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
-  const intervalRef = useRef<any>(0);
+  const intervalRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const startRef = useRef(0);
 
   useEffect(() => {
